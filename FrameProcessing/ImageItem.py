@@ -61,3 +61,4 @@ class ImageItem(FrameItem):
             for fi in self.frame_items:
                 fi.render(self.rendering_image)
         image.paste(self.rendering_image)
+        self.change_image = False

@@ -7,34 +7,21 @@ class TextItem(FrameItem):
         self.text = text
         self.lines_amount = lines_amount
 
-    def get_text(self):
-        """
-        This function returns the text.
-        :param self:
-        :return: the map image
-        """
-        return self.text
+    @property
+    def text(self):
+        return self.__text
 
-    def set_text(self, text):
-        """
-        This function sets the text.
-        :param text: the text to be set.
-        """
-        self.text = text
+    @text.setter
+    def text(self, text):
+        self.__text = text
 
-    def get_lines_amount(self):
-        """
-        This function returns the amount of lines of the TextItem.
-        :return: the amount of lines of the TextItem.
-        """
-        return self.lines_amount
+    @property
+    def lines_amount(self):
+        return self.__lines_amount
 
-    def set_lines_amount(self, lines_amount):
-        """
-        Sets the amount of lines of the TextItem.
-        :param lines_amount: the amount of lines of the TextItem.
-        """
-        self.lines_amount = lines_amount
+    @lines_amount.setter
+    def lines_amount(self, lines_amount):
+        self.__lines_amount = lines_amount
 
     def render(self, image):
         pass

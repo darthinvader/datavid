@@ -1,7 +1,8 @@
 import pandas as pd
 
-def read_csv(filename):
-    df = pd.read_csv(filename, encoding='ISO-8859-1')
+
+def read_csv(filename, encoding='ISO-8859-1'):
+    df = pd.read_csv(filename, encoding=encoding)
     return df
 
 

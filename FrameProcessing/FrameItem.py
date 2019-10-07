@@ -3,13 +3,13 @@ from abc import ABC, abstractmethod
 
 class FrameItem(ABC):
 
-    def __init__(self, width, height, x=0, y=0, angle=0, order=1):
+    def __init__(self, width, height, x=0, y=0, order=1, angle=0):
         self.width = width
         self.height = height
         self.x = x
         self.y = y
-        self.angle = angle
         self.order = order
+        self.angle = angle
 
     def __lt__(self, other):
         return self.order < other.order
