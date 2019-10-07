@@ -3,8 +3,9 @@ import math
 
 
 class MapFrameItem(ShapeItem):
-    def __init__(self, longitude, latitude, order=1, fill_color=(255, 0, 0, 255), decay_timer=1, percentage=0.001):
-        super().__init__(0, 0, 0, 0, order, fill_color)
+    def __init__(self, shape_type, longitude, latitude, order=1, fill_color=(255, 0, 0, 255), decay_timer=1,
+                 percentage=0.001):
+        super().__init__(shape_type, 0, 0, 0, 0, order, fill_color)
         self.percentage = percentage
         self.longitude = longitude
         self.latitude = latitude
@@ -28,10 +29,9 @@ class MapFrameItem(ShapeItem):
 
     @longitude.setter
     def longitude(self, longitude):
-        if longitude > 180:
-            longitude = 180
-        elif longitude < -180:
-            longitude = -180
+        "This bizarre code down calculates in case longitude is above 180 the position if it wraps around"
+        "falls into that location which is (longitude + 180) modulo 360 minus 180"
+        longitude = ((longitude + 180) % 360) - 180
         self.__longitude = longitude
 
     @property
@@ -40,6 +40,11 @@ class MapFrameItem(ShapeItem):
 
     @latitude.setter
     def latitude(self, latitude):
+        if latitude > 90:
+            latitude = 90
+        elif latitude < -90:
+            latitude = -90
+
         self.__latitude = latitude
 
     @property
@@ -55,7 +60,7 @@ class MapFrameItem(ShapeItem):
 
     def calculate_position(self, image_width, image_height):
         self.x = math.floor((image_width / 360) * (180 + self.longitude))
-        self.y = math.floor((image_height / 360) * (90 - self.latitude))
+        self.y = math.floor((image_height / 180) * (90 - self.latitude))
 
     def calculate_size(self, image_width, image_height):
         self.width = ((image_width * image_height) * (self.percentage ** 2)) / 2

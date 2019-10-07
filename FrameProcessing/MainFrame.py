@@ -3,8 +3,8 @@ import bisect
 
 
 class MainFrame:
-    def __init__(self, mode="RGB", dimensions=(3840, 2160), color=(0, 0, 0)):
-        self.image = Image.new(mode, dimensions, color)
+    def __init__(self, mode="RGB", width=3840, height=2160, color=(0, 0, 0)):
+        self.image = Image.new(mode, (width, height), color)
         self.frame_items = list()
 
     @property
@@ -34,3 +34,6 @@ class MainFrame:
     def render(self):
         for fi in self.frame_items:
             fi.render(self.image)
+
+    def show(self):
+        self.image.show()
