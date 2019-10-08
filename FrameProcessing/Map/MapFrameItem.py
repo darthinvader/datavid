@@ -70,7 +70,17 @@ class MapFrameItem(ShapeItem):
         self.y = math.ceil((image_height / 180) * (90 - self.latitude))
 
     def calculate_size(self, image_width, image_height):
-        self.width = math.ceil(((image_width * image_height) ** 0.5) * (self.percentage))
+        """
+        This function calculates the width and height of the shape we want to create.(basically the diameter
+        for a circle and the side for a square).
+        the width and height is proportional to the percentage. So the area of the shape is proportional to the
+        square of the square of the percentage.
+        :param image_width: the image width that we will paint the shape, it is required to calculate the size of the
+        shape
+        :param image_height: the image height that we will paint the shape, it is required to calculate the size of the
+        shape
+        """
+        self.width = math.ceil(((image_width * image_height) ** 0.5) * self.percentage)
         self.height = self.width
 
     def render(self, image):

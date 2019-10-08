@@ -13,10 +13,14 @@ class MapFrame(ImageItem):
                 fi.decay()
 
     def remove_decayed_items(self):
+        decayed_items_id = list()
         for fi in self.frame_items:
             if type(fi) == MapFrameItem:
-                if fi.decay == 0:
-                    self.remove_frame_item(id(fi))
+                if fi.decay_timer == 0:
+                    decayed_items_id.append(id(fi))
+
+        for did in decayed_items_id:
+            self.remove_frame_item(did)
 
     def render(self, image):
         self.remove_decayed_items()
