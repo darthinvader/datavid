@@ -1,6 +1,6 @@
 from FrameProcessing.FrameItem import FrameItem
-from PIL import ImageDraw
-
+from PIL import ImageDraw, Image
+import math
 
 class ShapeItem(FrameItem):
 
@@ -45,10 +45,17 @@ class ShapeItem(FrameItem):
         self.__outline_width = outline_width
 
     def render(self, image):
+
+        shape_layer_position = (math.floor(self.x - self.width / 2), math.floor(self.y - self.height / 2))
         bounding_box = (
-            self.x - self.width / 2, self.y - self.height / 2, self.x + self.width / 2, self.y + self.height / 2)
-        draw = ImageDraw.Draw(image, 'RGBA')
+            0, 0, self.width, self.height)
+        # Firstly we create a shape_layer and draw the shape in it
+        print(self.width,self.height)
+        shape_layer = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(shape_layer, 'RGBA')
         if self.shape_type == "Ellipse":
             draw.ellipse(bounding_box, fill=self.fill_color, outline=self.outline_fill, width=self.outline_width)
         elif self.shape_type == "Box":
             draw.rectangle(bounding_box, fill=self.fill_color, outline=self.outline_fill, width=self.outline_width)
+        #and then we paste the shape_layer into the image
+        image.paste(shape_layer, shape_layer_position, shape_layer)

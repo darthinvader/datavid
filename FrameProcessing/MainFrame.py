@@ -3,7 +3,7 @@ import bisect
 
 
 class MainFrame:
-    def __init__(self, mode="RGB", width=3840, height=2160, color=(0, 0, 0)):
+    def __init__(self, mode="RGBA", width=3840, height=2160, color=(0, 0, 0, 0)):
         self.image = Image.new(mode, (width, height), color)
         self.frame_items = list()
 

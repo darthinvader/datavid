@@ -1,9 +1,8 @@
 from FrameProcessing.FrameItem import FrameItem
-from PIL import ImageFont, ImageDraw
+from PIL import ImageFont, ImageDraw, Image
 
 
-# Direction and opacity on text don't work right now!
-# Both above functions are not that important!
+# Direction on text don't work right now!
 
 class TextItem(FrameItem):
     def __init__(self, text, font_path, x=0, y=0, order=1, font_size=10,
@@ -69,6 +68,12 @@ class TextItem(FrameItem):
         self.__font_size = font_size
 
     def render(self, image):
-        draw = ImageDraw.Draw(image, 'RGBA')
         # direction is not supported until i can install libraqm
+        # We create a new text layer image and since we don't know how big the text is going to be we just
+        # assign it the size of the image we are going to paste the text and we make it all transparent
+        text_layer = Image.new("RGBA", (image.width, image.height), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(text_layer, 'RGBA')
+        # Then we draw the text onto the the text layer
         draw.text((self.x, self.y), self.text, self.fill_color, self.font, spacing=self.spacing, align=self.align)
+        # And then we paste the text layer on our image
+        image.paste(text_layer, (0, 0), text_layer)

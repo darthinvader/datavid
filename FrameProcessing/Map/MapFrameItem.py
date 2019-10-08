@@ -5,7 +5,7 @@ import math
 class MapFrameItem(ShapeItem):
     def __init__(self, shape_type, longitude, latitude, order=1, fill_color=(255, 0, 0, 255),
                  outline_fill=(255, 0, 0, 255), outline_width=0, decay_timer=1,
-                 percentage=0.001):
+                 percentage=0.01):
         super().__init__(shape_type, 0, 0, 0, 0, order, fill_color, outline_fill, outline_width)
         self.percentage = percentage
         self.longitude = longitude
@@ -60,11 +60,17 @@ class MapFrameItem(ShapeItem):
         self.decay_timer -= 1
 
     def calculate_position(self, image_width, image_height):
-        self.x = math.floor((image_width / 360) * (180 + self.longitude))
-        self.y = math.floor((image_height / 180) * (90 - self.latitude))
+        """
+        This function calculates the position of the MapFrameItem
+        :param image_width: the source image width
+        :param image_height: the source image height
+        :return:
+        """
+        self.x = math.ceil((image_width / 360) * (180 + self.longitude))
+        self.y = math.ceil((image_height / 180) * (90 - self.latitude))
 
     def calculate_size(self, image_width, image_height):
-        self.width = ((image_width * image_height) * (self.percentage ** 2)) / 2
+        self.width = math.ceil(((image_width * image_height) ** 0.5) * (self.percentage))
         self.height = self.width
 
     def render(self, image):

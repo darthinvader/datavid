@@ -17,7 +17,7 @@ class ImageItem(FrameItem):
 
     @image.setter
     def image(self, image_path):
-        self.__image = Image.open(image_path)
+        self.__image = Image.open(image_path).convert('RGBA')
         self.change_image = True
 
     @property
@@ -50,15 +50,22 @@ class ImageItem(FrameItem):
         self.change_image = True
 
     def remove_frame_item(self, ID):
-        for fi in self.__frame_items:
+        for fi in self.frame_items:
             if id(fi) == ID:
                 self.__frame_items.remove(fi)
                 self.change_image = True
+
+    def get_frame_item(self, ID):
+        for fi in self.frame_items:
+            if id(fi) == ID:
+                # We assume that we want the item to change its properties
+                self.change_image = True
+                return fi
 
     def render(self, image):
         if self.change_image:
             self.rendering_image = self.image.resize((self.width, self.height))
             for fi in self.frame_items:
                 fi.render(self.rendering_image)
-        image.paste(self.rendering_image)
+        image.paste(self.rendering_image, (self.x, self.y), mask=self.rendering_image)
         self.change_image = False
