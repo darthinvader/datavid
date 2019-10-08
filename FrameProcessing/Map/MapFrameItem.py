@@ -3,9 +3,10 @@ import math
 
 
 class MapFrameItem(ShapeItem):
-    def __init__(self, shape_type, longitude, latitude, order=1, fill_color=(255, 0, 0, 255), decay_timer=1,
+    def __init__(self, shape_type, longitude, latitude, order=1, fill_color=(255, 0, 0, 255),
+                 outline_fill=(255, 0, 0, 255), outline_width=0, decay_timer=1,
                  percentage=0.001):
-        super().__init__(shape_type, 0, 0, 0, 0, order, fill_color)
+        super().__init__(shape_type, 0, 0, 0, 0, order, fill_color, outline_fill, outline_width)
         self.percentage = percentage
         self.longitude = longitude
         self.latitude = latitude
@@ -29,8 +30,8 @@ class MapFrameItem(ShapeItem):
 
     @longitude.setter
     def longitude(self, longitude):
-        "This bizarre code down calculates in case longitude is above 180 the position if it wraps around"
-        "falls into that location which is (longitude + 180) modulo 360 minus 180"
+        # This bizarre code down calculates in case longitude is above 180 the position if it wraps around
+        # falls into that location which is (longitude + 180) modulo 360 minus 180.
         longitude = ((longitude + 180) % 360) - 180
         self.__longitude = longitude
 

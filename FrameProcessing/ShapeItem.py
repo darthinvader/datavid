@@ -28,6 +28,22 @@ class ShapeItem(FrameItem):
     def fill_color(self, fill_color):
         self.__fill_color = fill_color
 
+    @property
+    def outline_fill(self):
+        return self.__outline_fill
+
+    @outline_fill.setter
+    def outline_fill(self, outline_fill):
+        self.__outline_fill = outline_fill
+
+    @property
+    def outline_width(self):
+        return self.__outline_width
+
+    @outline_width.setter
+    def outline_width(self, outline_width):
+        self.__outline_width = outline_width
+
     def render(self, image):
         bounding_box = (
             self.x - self.width / 2, self.y - self.height / 2, self.x + self.width / 2, self.y + self.height / 2)
