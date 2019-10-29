@@ -1,15 +1,8 @@
 from PIL import Image
 import bisect
 
-
-class MainFrame:
-    def __init__(self, mode="RGBA", width=3840, height=2160, color=(0, 0, 0, 0)):
-        """The constrution for the MainFrame
-        :param mode: the mode of the primer image (RGBA is the default ).
-        :param width: the width of the primer image
-        :param height: the height of the primer image
-        :param color: the color of the primer image
-        """
+class InfographicFrame:
+    def __init__(self, mode='RGBA', width=3840, height=2160, color=(0, 0, 0, 0)):
         self.mode = mode
         self.width = width
         self.height = height
@@ -63,10 +56,6 @@ class MainFrame:
         for fi in self.__frame_items:
             if id(fi) == ID:
                 self.__frame_items.remove(fi)
-
-    def render(self):
-        for fi in self.frame_items:
-            fi.render(self.image)
 
     def show(self):
         self.image.show()
