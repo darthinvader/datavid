@@ -8,6 +8,7 @@ class InfographicFrame:
         self.height = height
         self.image = Image.new(mode, (width, height), color)
         self.frame_items = list()
+        self.info_items = list()
 
     @property
     def image(self):
@@ -24,6 +25,14 @@ class InfographicFrame:
     @frame_items.setter
     def frame_items(self, frame_items):
         self.__frame_items = frame_items
+
+    @property
+    def info_items(self):
+        return self.__info_items
+
+    @info_items.setter
+    def info_items(self, info_items):
+        self.__info_items = info_items
 
     @property
     def mode(self):
@@ -56,6 +65,18 @@ class InfographicFrame:
         for fi in self.__frame_items:
             if id(fi) == ID:
                 self.__frame_items.remove(fi)
+
+    def add_info_item(self, info_item):
+        bisect.insort(self.info_items, info_item)
+
+    def remove_info_item(self, ID):
+        for fi in self.__frame_items:
+            if id(fi) == ID:
+                self.__info_items.remove(fi)
+
+    # Define the rendering (which is the most difficult part)
+    def render(self):
+        pass
 
     def show(self):
         self.image.show()
