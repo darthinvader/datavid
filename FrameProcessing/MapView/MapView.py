@@ -3,9 +3,9 @@ from PIL import Image
 
 class MapView:
     def __init__(self, image_path, width, height, x=0, y=0):
-        self.image = image_path
         self.width = width
         self.height = height
+        self.image = image_path
         self.x = x
         self.y = y
         self.items = list()

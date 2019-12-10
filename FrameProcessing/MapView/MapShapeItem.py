@@ -1,5 +1,5 @@
 class MapShapeItem:
-    def __init__(self, shape_item, ticks):
+    def __init__(self, shape_item, ticks=100):
         self.shape_item = shape_item
         self.ticks = ticks
 

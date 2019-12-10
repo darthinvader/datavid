@@ -4,7 +4,7 @@ import math
 
 
 class ShapeItem(FrameItem):
-    def __init__(self, shape_type, width, height, x=0, y=0, fill_color=(255, 0, 0, 255),
+    def __init__(self, width, height, shape_type="Ellipse", x=0, y=0, fill_color=(255, 0, 0, 255),
                  outline_fill=(255, 0, 0, 255), outline_width=0):
         super().__init__(width, height, x, y)
         self.shape_type = shape_type
