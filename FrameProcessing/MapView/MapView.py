@@ -50,16 +50,17 @@ class MapView:
     def y(self, y):
         self.__y = y
 
-    def add_to_list(self, item):
+    def add_item(self, item):
         self.items.append(item)
 
-    def remove_from_list(self, item):
+    def remove_item(self, item):
         self.items.remove(item)
 
-    def tick_down_items(self):
+    def tick_down(self):
         for item in self.items:
             item.tick_down()
-        self.items = filter(MapView.item_ticks_zeroed, self.items)
+        filtered_list = filter(MapView.item_ticks_zeroed, self.items)
+        self.items = list(filtered_list)
 
     @staticmethod
     def item_ticks_zeroed(item):
@@ -71,4 +72,4 @@ class MapView:
         image.paste(self.image, (self.x, self.y), mask=self.image)
         for item in self.items:
             item.shape_item.render(image)
-        self.tick_down_items()
+        self.tick_down()
