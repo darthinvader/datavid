@@ -1,4 +1,3 @@
-from PIL import Image
 from FrameProcessing.MapView.MapShapeItem import MapShapeItem
 from FrameProcessing.BasicItems.ShapeItem import ShapeItem
 from DataProcessing import DataframeProcess
@@ -57,14 +56,18 @@ class MapShapeFactory:
         self.__data_chunks = data_chunks
 
     def render_next_frame(self, image):
+        # First we check if we are finished with our data
         if self.data_index >= len(self.data):
             return True
 
+        # Then we check if we are at the beggining of the data so we chop it into pieces
         if self.chunk_index == 0:
             self.data_chunks = DataframeProcess.split_data(self.data[self.data_index], self.frame_timer)
             self.data_index += 1
         chunk = self.data_chunks[self.chunk_index]
+        # The chunks are created in order to fill the in-between frames of the video with something
 
+        # Then we create new map items for each data point
         for data_point in chunk:
             size = math.floor(data_point['percentage'] * math.sqrt(self.map_view.width * self.map_view.width))
             x = data_point['x']
@@ -81,9 +84,11 @@ class MapShapeFactory:
             map_shape_item = MapShapeItem(shape_item, ticks)
             self.map_view.add_item(map_shape_item)
 
+        # we increment the chunk we are in
         self.chunk_index += 1
         if self.chunk_index >= self.frame_timer:
             self.chunk_index = 0
 
+        # then render the map view
         self.map_view.render(image)
         return False

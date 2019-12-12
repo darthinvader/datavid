@@ -69,7 +69,13 @@ class MapView:
         return True
 
     def render(self, image):
+        '''
+            Renders the current map with the current items.
+        '''
+        # First we paste our Map Image into the image
         image.paste(self.image, (self.x, self.y), mask=self.image)
+        # Then we render every item we have into the image
         for item in self.items:
             item.shape_item.render(image)
+        # Then we tick down the items
         self.tick_down()

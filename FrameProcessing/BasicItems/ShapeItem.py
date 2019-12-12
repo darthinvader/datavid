@@ -52,7 +52,7 @@ class ShapeItem(FrameItem):
         # Firstly we create a shape_layer and draw the shape in it
         shape_layer = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
         draw = ImageDraw.Draw(shape_layer, 'RGBA')
-
+        # Then we check what type of shape is the shape
         if self.shape_type == "Ellipse":
             draw.ellipse(bounding_box, fill=self.fill_color, outline=self.outline_fill, width=self.outline_width)
         elif self.shape_type == "Box":
