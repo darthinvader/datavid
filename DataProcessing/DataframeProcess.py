@@ -48,7 +48,7 @@ def add_default_shape_settings(df):
     df_length = df['shape_type'].size
     df['fill_color'] = [(255, 255, 255, 255)] * df_length
     df['outline_fill'] = [(255, 255, 255, 255)] * df_length
-    df['percentage'] = 0.005
+    df['percentage'] = 0.004
 
 
 def longitude_to_point(longitude, image_width):
