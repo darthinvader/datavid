@@ -60,7 +60,7 @@ class MapShapeFactory:
         if self.data_index >= len(self.data):
             return True
 
-        # Then we check if we are at the beggining of the data so we chop it into pieces
+        # Then we check if we are at the start of the data so we chop it into pieces
         if self.chunk_index == 0:
             self.data_chunks = DataframeProcess.split_data(self.data[self.data_index], self.frame_timer)
             self.data_index += 1
@@ -77,6 +77,7 @@ class MapShapeFactory:
             outline_fill = data_point['outline_fill']
             outline_width = data_point['outline_width']
             ticks = data_point['ticks']
+            effects = data_point['effects']
             width = size
             height = size
 
