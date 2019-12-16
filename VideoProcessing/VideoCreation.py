@@ -20,7 +20,7 @@ def runner(function, duration, filename, fps, audio=None):
         elif type(audio) is mpy.AudioClip:
             audio_clip = audio
         else:
-            raise "Audio is incorrect type of variable"
+            raise Exception("Parameter audio is incorrect type of variable.")
 
         audio_clip = audio_clip.set_duration(clip.duration)
         clip.audio = audio_clip
