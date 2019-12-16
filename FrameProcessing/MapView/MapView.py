@@ -57,6 +57,9 @@ class MapView:
         self.items.remove(item)
 
     def tick_down(self):
+        """
+            Ticks down the items and then removes the ones that are less than 0
+        """
         for item in self.items:
             item.tick_down()
         filtered_list = filter(MapView.item_ticks_zeroed, self.items)
@@ -69,13 +72,15 @@ class MapView:
         return True
 
     def render(self, image):
-        '''
+        """
             Renders the current map with the current items.
-        '''
+        """
         # First we paste our Map Image into the image
         image.paste(self.image, (self.x, self.y), mask=self.image)
+
         # Then we render every item we have into the image
         for item in self.items:
             item.shape_item.render(image)
+
         # Then we tick down the items
         self.tick_down()
