@@ -33,10 +33,10 @@ def audio_list_combine(audio):
     audio_clip_list = list()
     # We add all the audiofiles to a list
     for audio_file in audio:
-        if audio_file is str:
-            temp_audio_clip = mpy.AudioFileClip(audio)
-        elif audio_file is mpy.AudioClip:
-            temp_audio_clip = mpy.AudioFileClip(audio)
+        if type(audio_file) is str:
+            temp_audio_clip = mpy.AudioFileClip(audio_file)
+        elif type(audio_file) is mpy.AudioClip:
+            temp_audio_clip = audio_file
         else:
             raise Exception(
                 "Parameter audio that was passed as a list containing elements of incorrect variable type. "
