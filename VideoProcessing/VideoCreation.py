@@ -19,13 +19,10 @@ def runner(function, duration, filename, fps, audio=None):
 
         elif type(audio) is mpy.AudioClip:
             audio_clip = audio
-        try:
-            audio_clip = audio_clip.set_duration(clip.duration)
-            clip.audio = audio_clip
+        else:
+            raise "Audio is incorrect type of variable"
 
-        except UnboundLocalError:
-            print(
-                "Your audio was not a supported variable and was ommited.\nRendering will continue normally without audio.")
-            # write the videofile
+        audio_clip = audio_clip.set_duration(clip.duration)
+        clip.audio = audio_clip
 
     clip.write_videofile(filename, fps=fps)
