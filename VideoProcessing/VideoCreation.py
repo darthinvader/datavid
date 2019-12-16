@@ -6,10 +6,26 @@ def runner(function, duration, filename, fps, audio=None):
 
     # if the audio exists
     if audio is not None:
-        # then open the audiofile and add it to the video
-        audio_clip = mpy.AudioFileClip(audio)
-        audio_clip.set_duration(clip.duration)
-        clip.audio = audio_clip
+        wrong_audio_type = False
+        if type(audio) is list:
+            audio_clip_list = list()
+            for audio_file in audio:
+                temp_audio_clip = mpy.AudioFileClip(audio)
+                audio_clip_list.append(temp_audio_clip)
+            audio_clip = mpy.CompositeAudioClip(audio_clip_list)
 
-    # write the videofile
+        elif type(audio) is str:
+            audio_clip = mpy.AudioFileClip(audio)
+
+        elif type(audio) is mpy.AudioClip:
+            audio_clip = audio
+        try:
+            audio_clip = audio_clip.set_duration(clip.duration)
+            clip.audio = audio_clip
+
+        except UnboundLocalError:
+            print(
+                "Your audio was not a supported variable and was ommited.\nRendering will continue normally without audio.")
+            # write the videofile
+
     clip.write_videofile(filename, fps=fps)
