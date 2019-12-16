@@ -1,7 +1,8 @@
-from FrameProcessing.MapView.MapShapeItem import MapShapeItem
-from FrameProcessing.BasicItems.ShapeItem import ShapeItem
-from DataProcessing import DataframeProcess
 import math
+
+from DataProcessing import DataframeProcess
+from FrameProcessing.BasicItems.ShapeItem import ShapeItem
+from FrameProcessing.MapView.MapShapeItem import MapShapeItem
 
 
 class MapShapeFactory:
