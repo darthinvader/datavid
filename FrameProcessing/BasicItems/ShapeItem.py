@@ -1,11 +1,13 @@
-from FrameProcessing.BasicItems.FrameItem import FrameItem
-from PIL import ImageDraw, Image
 import math
+
+from PIL import ImageDraw, Image
+
+from FrameProcessing.BasicItems.FrameItem import FrameItem
 
 
 class ShapeItem(FrameItem):
-    def __init__(self, width, height, shape_type="Ellipse", x=0, y=0, fill_color=(255, 0, 0, 255),
-                 outline_fill=(255, 0, 0, 255), outline_width=0):
+    def __init__(self, width=0, height=0, shape_type="Ellipse", x=0, y=0, fill_color=(255, 255, 255, 255),
+                 outline_fill=None, outline_width=0):
         super().__init__(width, height, x, y)
         self.shape_type = shape_type
         self.fill_color = fill_color

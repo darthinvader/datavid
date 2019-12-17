@@ -1,11 +1,10 @@
 import math
 
 from DataProcessing import DataframeProcess
-from FrameProcessing.BasicItems.ShapeItem import ShapeItem
-from FrameProcessing.MapView.MapShapeItem import MapShapeItem
+from FrameProcessing.MapView.MapShapeManager import MapShapeManager
 
 
-class MapShapeFactory:
+class MapViewManager:
     def __init__(self, map_view, data=None, frame_timer=10):
         self.map_view = map_view
         # the data contain all the settings of the shape_item. Those are:
@@ -93,12 +92,9 @@ class MapShapeFactory:
         for data_point in chunk:
             # Then we collect our x,y,shape_type,fill_color,outline_fill,outline_width,ticks,effects,width,height
             # So we can assign them to our shapeItem
+            shape_item = data_point['shape']
             x = data_point['x']
             y = data_point['y']
-            shape_type = data_point['shape_type']
-            fill_color = data_point['fill_color']
-            outline_fill = data_point['outline_fill']
-            outline_width = data_point['outline_width']
             ticks = data_point['ticks']
             effects = data_point['effects']  # As of now they are not used
 
@@ -108,8 +104,12 @@ class MapShapeFactory:
             height = size
 
             # We create our shape
-            shape_item = ShapeItem(width, height, shape_type, x, y, fill_color, outline_fill, outline_width)
-            map_shape_item = MapShapeItem(shape_item, ticks)
+            shape_item.width = width
+            shape_item.height = height
+            shape_item.x = x
+            shape_item.y = y
+
+            map_shape_item = MapShapeManager(shape_item, ticks)
 
             # we add our shapes to the MapView
             self.map_view.add_item(map_shape_item)

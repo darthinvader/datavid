@@ -3,6 +3,8 @@ import math
 import numpy as np
 import pandas as pd
 
+from FrameProcessing.BasicItems.ShapeItem import ShapeItem
+
 
 def rename_dataframe_columns(df: pd.DataFrame, old_names: list, new_names: list):
     """
@@ -46,14 +48,12 @@ def add_default_shape_settings(df):
     """
         These are default values for most MapView rendering runs.
     """
-    df['shape_type'] = 'Ellipse'
+
     df['ticks'] = 60
-    df['outline_width'] = 0
-    df_length = df['shape_type'].size
-    df['fill_color'] = [(255, 255, 255, 255)] * df_length
-    df['outline_fill'] = [(255, 255, 255, 255)] * df_length
     df['percentage'] = 0.005
     df['effects'] = None
+    df_length = df['ticks'].size
+    df['shape'] = [ShapeItem() for x in range(0, df_length)]
 
 
 def longitude_to_point(longitude, image_width):

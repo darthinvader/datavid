@@ -1,7 +1,7 @@
 import moviepy.editor as mpy
 
 
-def runner(function, duration, filename, fps, audio=None):
+def runner(function, duration, filename, fps=60, audio=None):
     clip = mpy.VideoClip(function, duration=duration)
 
     # if the audio exists

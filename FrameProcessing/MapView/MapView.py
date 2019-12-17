@@ -53,6 +53,9 @@ class MapView:
     def add_item(self, item):
         self.items.append(item)
 
+    def add_items(self, items):
+        self.items.extend(items)
+
     def remove_item(self, item):
         self.items.remove(item)
 
@@ -80,7 +83,7 @@ class MapView:
 
         # Then we render every item we have into the image
         for item in self.items:
-            item.shape_item.render(image)
+            item.render(image)
 
         # Then we tick down the items
         self.tick_down()
