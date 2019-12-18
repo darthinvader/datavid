@@ -2,6 +2,7 @@ import math
 
 from DataProcessing import DataframeProcess
 from FrameProcessing.MapView.MapShapeManager import MapShapeManager
+from FrameProcessing.ShapeEffectsManager import ShapeEffectsManager
 
 
 class MapViewManager:
@@ -96,7 +97,6 @@ class MapViewManager:
             x = data_point['x']
             y = data_point['y']
             ticks = data_point['ticks']
-            effects = data_point['effects']  # As of now they are not used
 
             # percentage is a number between 1 and 0 that makes the shape have area equal to the percentage of the map
             size = math.floor(data_point['percentage'] * math.sqrt(self.map_view.width * self.map_view.width))
@@ -109,10 +109,12 @@ class MapViewManager:
             shape_item.x = x
             shape_item.y = y
 
-            map_shape_item = MapShapeManager(shape_item, ticks)
+            map_shape_manager = MapShapeManager(shape_item, ticks)
+
+            self.apply_effects(data_point, shape_item, map_shape_manager)
 
             # we add our shapes to the MapView
-            self.map_view.add_item(map_shape_item)
+            self.map_view.add_item(map_shape_manager)
 
     def increment_chunk(self):
         self.chunk_index += 1
@@ -123,3 +125,11 @@ class MapViewManager:
         if self.chunk_index == 0:
             self.data_chunks = DataframeProcess.split_data(self.data[self.data_index], self.frame_timer)
             self.data_index += 1
+
+    def apply_effects(self, data_point, shape_item, map_shape_manager):
+        effects = data_point['effects']  # As of now they are not used
+        if effects is None:
+            return
+        effect_manager = ShapeEffectsManager(effects, shape_item)
+        effect_manager.initialize_shape_effects()
+        map_shape_manager.effect_manager = effect_manager

@@ -51,8 +51,8 @@ def add_default_shape_settings(df):
 
     df['ticks'] = 60
     df['percentage'] = 0.005
-    df['effects'] = None
     df_length = df['ticks'].size
+    df['effects'] = [[] for x in range(0, df_length)]
     df['shape'] = [ShapeItem() for x in range(0, df_length)]
 
 

@@ -30,7 +30,7 @@ class MapShapeManager:
 
     def tick_down(self):
         if self.effect_manager is not None:
-            self.effect_manager.tick_up()
+            self.effect_manager.tick_frame()
         self.ticks -= 1
 
     def render(self, image):
