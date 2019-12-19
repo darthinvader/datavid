@@ -1,4 +1,4 @@
-from FrameProcessing.ShapeEffects.Effect import Effect
+from datavid.FrameProcessing.ShapeEffects.Effect import Effect
 
 
 class Fade(Effect):

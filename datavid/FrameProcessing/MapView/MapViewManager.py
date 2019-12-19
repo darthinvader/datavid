@@ -1,8 +1,8 @@
 import math
 
-from DataProcessing import DataframeProcess
-from FrameProcessing.MapView.MapShapeManager import MapShapeManager
-from FrameProcessing.ShapeEffectsManager import ShapeEffectsManager
+from datavid.DataProcessing import DataframeProcess
+from datavid.FrameProcessing.MapView.MapShapeManager import MapShapeManager
+from datavid.FrameProcessing.ShapeEffectsManager import ShapeEffectsManager
 
 
 class MapViewManager:

@@ -2,7 +2,7 @@ import math
 
 from PIL import ImageDraw, Image
 
-from FrameProcessing.BasicItems.FrameItem import FrameItem
+from datavid.FrameProcessing.BasicItems.FrameItem import FrameItem
 
 
 class ShapeItem(FrameItem):

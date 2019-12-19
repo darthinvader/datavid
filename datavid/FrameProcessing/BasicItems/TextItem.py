@@ -1,5 +1,6 @@
-from FrameProcessing.BasicItems.FrameItem import FrameItem
 from PIL import ImageFont, Image, ImageDraw
+
+from datavid.FrameProcessing.BasicItems.FrameItem import FrameItem
 
 
 # Direction on text don't work right now!

@@ -1,5 +1,6 @@
-from FrameProcessing.BasicItems.FrameItem import FrameItem
 from PIL import Image
+
+from datavid.FrameProcessing.BasicItems.FrameItem import FrameItem
 
 
 class ImageItem(FrameItem):

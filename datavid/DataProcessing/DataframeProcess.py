@@ -3,7 +3,7 @@ import math
 import numpy as np
 import pandas as pd
 
-from FrameProcessing.BasicItems.ShapeItem import ShapeItem
+from datavid.FrameProcessing.BasicItems.ShapeItem import ShapeItem
 
 
 def rename_dataframe_columns(df: pd.DataFrame, old_names: list, new_names: list):
