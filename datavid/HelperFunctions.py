@@ -3,7 +3,7 @@ import math
 import numpy as np
 import pandas as pd
 
-from datavid.FrameProcessing.BasicItems.ShapeItem import ShapeItem
+from datavid.BasicFrameItems.ShapeFrameItem import ShapeFrameItem
 
 
 def rename_dataframe_columns(df: pd.DataFrame, old_names: list, new_names: list):
@@ -34,14 +34,14 @@ def delete_columns(df: pd.DataFrame, deleted_columns: list):
         df.drop(column, axis=1, inplace=True)
 
 
-def split_data(data_list: list, pieces: int):
+def split_data(data_list: list, num_of_pieces: int):
     """
-        Splits @data_list to @pieces pieces.
+        Splits @data_list to @num_of_pieces pieces.
         @param data_list: our list we want to split
-        @param pieces: the amount of pieces we want to split our @data_list
+        @param num_of_pieces: the amount of pieces we want to split our @data_list
         @return: the split up list
     """
-    return np.array_split(data_list, pieces)
+    return np.array_split(data_list, num_of_pieces)
 
 
 def add_default_shape_settings(df):
@@ -49,11 +49,11 @@ def add_default_shape_settings(df):
         These are default values for most MapView rendering runs.
     """
 
-    df['ticks'] = 60
+    df['frames_to_live'] = 60
     df['percentage'] = 0.005
     df_length = df['ticks'].size
     df['effects'] = [[] for x in range(0, df_length)]
-    df['shape'] = [ShapeItem() for x in range(0, df_length)]
+    df['shape'] = ["Circle" for x in range(0, df_length)]
 
 
 def longitude_to_point(longitude, image_width):
