@@ -2,7 +2,6 @@ import math
 
 import numpy as np
 import pandas as pd
-
 from datavid.BasicFrameItems.ShapeFrameItem import ShapeFrameItem
 
 
@@ -48,10 +47,9 @@ def add_default_shape_settings(df):
     """
         These are default values for most MapView rendering runs.
     """
-
     df['frames_to_live'] = 60
     df['percentage'] = 0.005
-    df_length = df['ticks'].size
+    df_length = df['frames_to_live'].size
     df['effects'] = [[] for x in range(0, df_length)]
     df['shape'] = ["Circle" for x in range(0, df_length)]
 

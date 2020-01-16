@@ -71,15 +71,17 @@ class MapViewManager:
     def get_y(self, data_point):
         if 'latitude' in data_point.keys():
             latitude = data_point['latitude']
-            y = HelperFunctions.longitude_to_point(latitude)
+            width = self.map_image.width
+            y = HelperFunctions.longitude_to_point(latitude, width)
         else:
             y = data_point['y']
         return y
 
     def get_x(self, data_point):
         if 'longitude' in data_point.keys():
+            height = self.map_image.height
             longitude = data_point['longitude']
-            x = HelperFunctions.longitude_to_point(longitude)
+            x = HelperFunctions.longitude_to_point(longitude, height)
         else:
             x = data_point['x']
         return x
