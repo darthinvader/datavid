@@ -39,6 +39,7 @@ class MapViewManager:
         # then render the map view
         self.render_map(image)
         self.render_shapes(image)
+        self.current_frame += 1
 
     def check_and_split_data(self):
         if self.chunk_index == 0:
@@ -62,8 +63,10 @@ class MapViewManager:
             outline_width = self.get_outline_width(data_point)
             frames_to_live = data_point['frames_to_live']
 
-            shape_item = ShapeFrameItem(width, height, x, y, self.current_frame, None, shape_type, fill_color,
-                                        outline_fill, outline_width, frames_to_live)
+            shape_item = ShapeFrameItem(width=width, height=height, x=x, y=y, current_frame=self.current_frame,
+                                        shape_type=shape_type, fill_color=fill_color,
+                                        outline_fill=outline_fill, outline_width=outline_width,
+                                        frames_to_live=frames_to_live)
             self.set_shape_effects(data_point, shape_item)
 
             self.shapes.append(shape_item)
@@ -126,9 +129,9 @@ class MapViewManager:
     def render_shapes(self, image):
         for shape in self.shapes:
             shape.render(image)
-        self.increase_frame_counter()
+        self.increase_shapes_frame_counter()
 
-    def increase_frame_counter(self):
+    def increase_shapes_frame_counter(self):
         for shape in self.shapes:
             shape.increment_current_frame()
         filtered_list = filter(MapViewManager.item_expired, self.shapes)
