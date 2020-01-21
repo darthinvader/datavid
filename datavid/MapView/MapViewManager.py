@@ -40,18 +40,17 @@ class MapViewManager:
         self.render_map(image)
         self.render_shapes(image)
         self.current_frame += 1
+        # image.show()
 
     def check_and_split_data(self):
         if self.chunk_index == 0:
-            self.data_chunks = HelperFunctions.split_data(self.data[self.data_index], self.frame_timer)
+            self.data_chunks = HelperFunctions.split_data(self.data[self.data_index], self.number_of_split_frames)
             self.data_index += 1
 
     def data_points_to_shapes(self):
         chunk = self.data_chunks[self.chunk_index]
         for data_point in chunk:
-            percentage = data_point['percentage']
-            map_area_square_rooted = math.sqrt(self.map_image.width * self.map_image.width)
-            size = math.floor(percentage * map_area_square_rooted)
+            size = self.get_size(data_point)
             width = size
             height = size
             x = self.get_x(data_point)
@@ -71,23 +70,29 @@ class MapViewManager:
 
             self.shapes.append(shape_item)
 
+    def get_size(self, data_point):
+        percentage = data_point['percentage']
+        map_area_square_rooted = math.sqrt(self.map_image.width * self.map_image.width)
+        size = math.floor(percentage * map_area_square_rooted)
+        return size
+
     def get_y(self, data_point):
         if 'latitude' in data_point.keys():
-            latitude = data_point['latitude']
-            width = self.map_image.width
-            y = HelperFunctions.longitude_to_point(latitude, width)
-        else:
-            y = data_point['y']
-        return y
-
-    def get_x(self, data_point):
-        if 'longitude' in data_point.keys():
             height = self.map_image.height
-            longitude = data_point['longitude']
-            x = HelperFunctions.longitude_to_point(longitude, height)
+            latitude = data_point['latitude']
+            x = HelperFunctions.latitude_to_point(latitude, height)
         else:
             x = data_point['x']
         return x
+
+    def get_x(self, data_point):
+        if 'longitude' in data_point.keys():
+            width = self.map_image.width
+            longitude = data_point['longitude']
+            y = HelperFunctions.longitude_to_point(longitude, width)
+        else:
+            y = data_point['y']
+        return y
 
     def set_shape_effects(self, data_point, shape_item):
         if 'effects' in data_point.keys():

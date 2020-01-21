@@ -2,7 +2,6 @@ import math
 
 import numpy as np
 import pandas as pd
-from datavid.BasicFrameItems.ShapeFrameItem import ShapeFrameItem
 
 
 def rename_dataframe_columns(df: pd.DataFrame, old_names: list, new_names: list):
@@ -51,7 +50,7 @@ def add_default_shape_settings(df):
     df['percentage'] = 0.005
     df_length = df['frames_to_live'].size
     df['effects'] = [[] for x in range(0, df_length)]
-    df['shape'] = ["Circle" for x in range(0, df_length)]
+    df['shape_type'] = ["Ellipse" for x in range(0, df_length)]
 
 
 def longitude_to_point(longitude, image_width):

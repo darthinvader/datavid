@@ -4,7 +4,7 @@ from datavid.BasicFrameItems.AbstractFrameItem import AbstractFrameItem
 
 
 class ImageFrameItem(AbstractFrameItem):
-    def __init__(self, image, width=3840, height=2080, x=0, y=0, current_frame=0, frame_added=None, frames_to_live=-1):
+    def __init__(self, image, width=3840, height=2160, x=0, y=0, current_frame=0, frame_added=None, frames_to_live=-1):
         super().__init__(x, y, current_frame, frame_added, frames_to_live)
         self.width = width
         self.height = height
